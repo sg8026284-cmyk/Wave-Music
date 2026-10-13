@@ -1,0 +1,510 @@
+@property --spin-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+:root {
+  /* Hyper-Reactive Cyberpunk Audio Tokens */
+  --neon-lime: #00ff87;
+  --neon-cyan: #00f3ff;
+  --neon-magenta: #ff007f;
+  --neon-purple: #9d00ff;
+  --neon-amber: #ffaa00;
+
+  --chassis-glass: rgba(10, 13, 24, 0.72);
+  --channel-slot: rgba(4, 6, 14, 0.88);
+  --rim-specular: rgba(255, 255, 255, 0.2);
+  --text-white: #ffffff;
+  --text-dim: #94a3b8;
+  --text-sub: #cbd5e1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background-color: #030407;
+  perspective: 1400px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* --- Effect 1: Bass Stage Glow with Audio Swirl --- */
+body::before {
+  content: "";
+  position: fixed;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 127, 0.42) 0%,
+    rgba(157, 0, 255, 0.32) 25%,
+    rgba(0, 243, 255, 0.24) 50%,
+    rgba(0, 255, 135, 0.14) 68%,
+    transparent 80%
+  );
+  filter: blur(120px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: bassPulse 7s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Effect 2: Moving CRT Scanline + Radial Soundwave Track --- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      rgba(0, 243, 255, 0.08) 0px,
+      rgba(0, 243, 255, 0.08) 1px,
+      transparent 1px,
+      transparent 22px
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.35) 51%
+    );
+  background-size: 100% 100%, 100% 4px;
+  mask-image: radial-gradient(circle at center, #000 35%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 35%, transparent 85%);
+  animation: scanlines 0.2s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Effect 3: Floating 3D Sounddeck Chassis with Breathing Shadow --- */
+.registration-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 44px 36px 38px;
+  background: var(--chassis-glass);
+  backdrop-filter: blur(40px) saturate(240%);
+  -webkit-backdrop-filter: blur(40px) saturate(240%);
+  border-radius: 32px;
+  transform-style: preserve-3d;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.95),
+    0 35px 80px -15px rgba(0, 0, 0, 0.98),
+    0 0 50px -10px rgba(255, 0, 127, 0.4),
+    0 0 55px -10px rgba(0, 243, 255, 0.35),
+    inset 0 1px 1px var(--rim-specular);
+  animation: deckIdleFloat 5s ease-in-out infinite alternate;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+/* Rotating Neon Laser Border Edge */
+.registration-container::after {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 33.5px;
+  background: conic-gradient(
+    from var(--spin-angle),
+    var(--neon-lime),
+    var(--neon-cyan),
+    var(--neon-purple),
+    var(--neon-magenta),
+    var(--neon-amber),
+    var(--neon-lime)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1.5px;
+  pointer-events: none;
+  animation: rotateLaser 4.5s linear infinite;
+}
+
+/* --- Effect 4: Spinning Turntable Vinyl with Strobe Glint --- */
+.registration-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  width: 290px;
+  height: 290px;
+  margin-top: -145px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at center,
+      var(--neon-cyan) 0%,
+      var(--neon-magenta) 14px,
+      #030407 15px,
+      #030407 36px,
+      transparent 37%
+    ),
+    conic-gradient(
+      from 0deg,
+      rgba(255, 0, 127, 0.35),
+      rgba(0, 243, 255, 0.35),
+      rgba(157, 0, 255, 0.35),
+      rgba(0, 255, 135, 0.35),
+      rgba(255, 0, 127, 0.35)
+    ),
+    repeating-radial-gradient(
+      circle at center,
+      #090b14 0px,
+      #090b14 2px,
+      #181d2f 3px,
+      #090b14 4px
+    );
+  box-shadow:
+    -12px 0 40px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(0, 243, 255, 0.45);
+  z-index: -2;
+  transform: translateZ(-30px);
+  transition: right 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  animation: vinylSpin 3.2s linear infinite;
+  pointer-events: none;
+}
+
+.registration-container:hover {
+  animation-play-state: paused;
+  transform: translateY(-8px) translateZ(28px) rotateX(2deg);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.95),
+    0 45px 95px -15px rgba(0, 0, 0, 1),
+    0 0 80px -5px rgba(255, 0, 127, 0.7),
+    0 0 80px -5px rgba(0, 243, 255, 0.65),
+    inset 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.registration-container:hover::before {
+  right: -130px;
+  filter: brightness(1.35) drop-shadow(0 0 28px var(--neon-magenta));
+}
+
+/* Equalizer Title Header */
+.registration-container h2 {
+  position: relative;
+  font-size: 26px;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    var(--neon-cyan) 30%,
+    var(--neon-lime) 60%,
+    var(--neon-magenta) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 22px rgba(0, 243, 255, 0.6));
+}
+
+.registration-container h2::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 22px;
+  margin: 0 auto 14px;
+  background:
+    linear-gradient(to top, var(--neon-magenta), var(--neon-amber)) 0% 100% / 4px 50% no-repeat,
+    linear-gradient(to top, var(--neon-purple), var(--neon-magenta)) 25% 100% / 4px 100% no-repeat,
+    linear-gradient(to top, var(--neon-cyan), var(--neon-lime)) 50% 100% / 4px 35% no-repeat,
+    linear-gradient(to top, var(--neon-lime), var(--neon-amber)) 75% 100% / 4px 90% no-repeat,
+    linear-gradient(to top, var(--neon-magenta), var(--neon-cyan)) 100% 100% / 4px 65% no-repeat;
+  filter: drop-shadow(0 0 10px var(--neon-cyan));
+  animation: liveEQ 0.65s ease-in-out infinite alternate;
+}
+
+/* --- Form Fields --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-sub);
+  margin-bottom: 7px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* --- Effect 5: Neon Pulse & Depth on Input Focus --- */
+.form-group input,
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: var(--channel-slot);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-white);
+  font-size: 14px;
+  outline: none;
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.85),
+    0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-group input::placeholder,
+input::placeholder {
+  color: var(--text-dim);
+}
+
+.form-group input:hover,
+input:hover {
+  border-color: rgba(0, 243, 255, 0.55);
+  background: rgba(10, 14, 28, 0.98);
+}
+
+.form-group input:focus,
+input:focus {
+  border-color: var(--neon-cyan);
+  background: rgba(12, 17, 34, 1);
+  box-shadow:
+    0 0 0 3px rgba(0, 243, 255, 0.35),
+    0 0 30px -2px rgba(0, 255, 135, 0.65),
+    0 8px 24px -4px rgba(0, 243, 255, 0.45),
+    inset 0 1px 3px rgba(0, 0, 0, 0.95);
+  animation: inputGlowPulse 2s ease-in-out infinite alternate;
+}
+
+/* --- Effect 6: High-Frequency Master Button with Laser Sweep & Ripple --- */
+.submit-btn,
+button[type="submit"] {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  margin-top: 14px;
+  background: linear-gradient(
+    115deg,
+    var(--neon-lime) 0%,
+    var(--neon-cyan) 30%,
+    var(--neon-magenta) 70%,
+    var(--neon-amber) 100%
+  );
+  background-size: 240% 240%;
+  animation: gradientRoll 4.5s ease infinite;
+  border: none;
+  border-radius: 999px;
+  color: #030407;
+  font-size: 14.5px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow:
+    0 12px 35px -4px rgba(255, 0, 127, 0.7),
+    0 0 45px -4px rgba(0, 255, 135, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* Triangle Playhead Icon */
+.submit-btn::before,
+button[type="submit"]::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent #030407;
+  transition: transform 0.25s ease;
+}
+
+/* Laser Sheen Glide Sweep */
+.submit-btn::after,
+button[type="submit"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -140%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+}
+
+.submit-btn:hover,
+button[type="submit"]:hover {
+  transform: scale(1.04);
+  box-shadow:
+    0 18px 50px -4px rgba(255, 0, 127, 0.95),
+    0 0 75px -2px rgba(0, 243, 255, 0.85),
+    inset 0 1px 3px rgba(255, 255, 255, 1);
+}
+
+.submit-btn:hover::after,
+button[type="submit"]:hover::after {
+  left: 190%;
+}
+
+.submit-btn:hover::before,
+button[type="submit"]:hover::before {
+  transform: scale(1.3) translateX(1px);
+}
+
+.submit-btn:active,
+button[type="submit"]:active {
+  transform: scale(0.96);
+  filter: brightness(0.9);
+}
+
+/* Footer Link with Interactive Underline Expansion */
+.login-link {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.login-link a {
+  position: relative;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  font-weight: 800;
+  margin-left: 6px;
+  transition: filter 0.2s ease;
+}
+
+.login-link a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  box-shadow: 0 0 8px var(--neon-cyan);
+  transition: width 0.3s ease;
+}
+
+.login-link a:hover {
+  filter: drop-shadow(0 0 12px var(--neon-cyan)) brightness(1.3);
+}
+
+.login-link a:hover::after {
+  width: 100%;
+}
+
+/* --- Audio Frequency & Stage Keyframes --- */
+@keyframes rotateLaser {
+  to {
+    --spin-angle: 360deg;
+  }
+}
+
+@keyframes vinylSpin {
+  from {
+    transform: translateZ(-30px) rotate(0deg);
+  }
+  to {
+    transform: translateZ(-30px) rotate(360deg);
+  }
+}
+
+@keyframes liveEQ {
+  0% {
+    background-size: 4px 20%, 4px 90%, 4px 25%, 4px 70%, 4px 35%;
+  }
+  25% {
+    background-size: 4px 85%, 4px 35%, 4px 100%, 4px 40%, 4px 95%;
+  }
+  50% {
+    background-size: 4px 45%, 4px 100%, 4px 50%, 4px 95%, 4px 25%;
+  }
+  75% {
+    background-size: 4px 100%, 4px 30%, 4px 85%, 4px 25%, 4px 75%;
+  }
+  100% {
+    background-size: 4px 60%, 4px 85%, 4px 35%, 4px 100%, 4px 45%;
+  }
+}
+
+@keyframes gradientRoll {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes bassPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.92) rotate(0deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(-47%, -53%) scale(1.22) rotate(110deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.92) rotate(220deg);
+    opacity: 0.85;
+  }
+}
+
+@keyframes deckIdleFloat {
+  0% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+  100% {
+    transform: translateY(-8px) rotateX(1.5deg);
+  }
+}
+
+@keyframes inputGlowPulse {
+  0% {
+    box-shadow:
+      0 0 0 3px rgba(0, 243, 255, 0.35),
+      0 0 25px -2px rgba(0, 255, 135, 0.55),
+      0 8px 24px -4px rgba(0, 243, 255, 0.4),
+      inset 0 1px 3px rgba(0, 0, 0, 0.95);
+  }
+  100% {
+    box-shadow:
+      0 0 0 4px rgba(0, 243, 255, 0.5),
+      0 0 38px 2px rgba(0, 255, 135, 0.8),
+      0 10px 28px -4px rgba(0, 243, 255, 0.6),
+      inset 0 1px 3px rgba(0, 0, 0, 0.95);
+  }
+}
+
+@keyframes scanlines {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 0 0, 0 8px;
+  }
+}

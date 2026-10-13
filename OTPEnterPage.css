@@ -1,0 +1,302 @@
+:root {
+  /* Ultraviolet Cyber-Lounge Palette */
+  --accent-magenta: #f43f5e;
+  --accent-cyan: #06b6d4;
+  --accent-violet: #a855f7;
+  --deck-black: #08090f;
+  --panel-surface: rgba(18, 20, 30, 0.8);
+  --groove-line: rgba(255, 255, 255, 0.08);
+  --text-pure: #ffffff;
+  --text-muted: #94a3b8;
+  --glow-shadow: 0 0 24px rgba(6, 182, 212, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  background-color: var(--deck-black);
+  perspective: 1200px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* --- Ambient Club Equalizer & Strobe Lighting --- */
+body::before {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45vh;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(6, 182, 212, 0.12) 0px,
+    rgba(6, 182, 212, 0.12) 12px,
+    transparent 12px,
+    transparent 24px
+  );
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) 10%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) 10%, transparent 100%);
+  animation: liveEqualizer 2s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.3) 0%,
+    rgba(244, 63, 94, 0.18) 40%,
+    rgba(6, 182, 212, 0.1) 65%,
+    transparent 75%
+  );
+  filter: blur(120px);
+  animation: strobeMorph 12s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- OTP Floating Card Chassis --- */
+.registration-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 44px 34px;
+  background: var(--panel-surface);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transform-style: preserve-3d;
+  box-shadow:
+    0 0 0 1px rgba(244, 63, 94, 0.25),
+    0 24px 50px -12px rgba(0, 0, 0, 0.85),
+    0 0 45px -10px rgba(168, 85, 247, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  animation: hardwareFloat 7s ease-in-out infinite alternate;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+/* Mini Vinyl Grooves */
+.registration-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  width: 220px;
+  height: 220px;
+  margin-top: -110px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at center,
+      #f43f5e 0%,
+      #f43f5e 12px,
+      #08090f 13px,
+      #08090f 30px,
+      transparent 31%
+    ),
+    repeating-radial-gradient(
+      circle at center,
+      #11131b 0px,
+      #11131b 2px,
+      #1b1e2a 3px,
+      #11131b 4px
+    );
+  box-shadow:
+    -6px 0 24px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(244, 63, 94, 0.25);
+  z-index: -1;
+  transform: translateZ(-35px) rotate(0deg);
+  transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: vinylSpin 5s linear infinite;
+  pointer-events: none;
+}
+
+.registration-container:hover {
+  animation-play-state: paused;
+  transform: rotateX(0deg) rotateY(0deg) translateZ(30px) translateY(-4px);
+  box-shadow:
+    0 0 0 1px var(--accent-cyan),
+    0 30px 70px -15px rgba(0, 0, 0, 0.95),
+    var(--glow-shadow),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35);
+}
+
+.registration-container:hover::before {
+  right: -90px;
+  transform: translateZ(-20px);
+}
+
+/* --- Header Text --- */
+.registration-container h2 {
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  transform: translateZ(28px);
+  background: linear-gradient(
+    135deg,
+    #ffffff 20%,
+    var(--accent-cyan) 60%,
+    var(--accent-magenta) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 12px rgba(244, 63, 94, 0.35));
+}
+
+/* --- Form Layout --- */
+.form-group {
+  margin-bottom: 24px;
+  transform: translateZ(20px);
+}
+
+/* Prominent Centered OTP Input Field */
+.form-group input {
+  width: 100%;
+  padding: 16px 14px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  border: 1.5px solid var(--groove-line);
+  border-radius: 14px;
+  color: var(--text-pure);
+  background: rgba(11, 13, 20, 0.85);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.85),
+    0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-group input::placeholder {
+  color: #475569;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  background: rgba(16, 19, 30, 0.95);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 3px rgba(6, 182, 212, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.8),
+    0 8px 20px -4px rgba(6, 182, 212, 0.35);
+}
+
+/* --- Submit Button --- */
+.submit-btn {
+  position: relative;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(
+    135deg,
+    var(--accent-magenta) 0%,
+    var(--accent-violet) 50%,
+    var(--accent-cyan) 100%
+  );
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform: translateZ(32px);
+  box-shadow:
+    0 6px 0 0 #4c0519,
+    0 16px 25px rgba(244, 63, 94, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.2s ease;
+  overflow: hidden;
+}
+
+.submit-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: btnLaser 3.5s ease-in-out infinite;
+}
+
+.submit-btn:hover {
+  filter: brightness(1.1);
+  transform: translateZ(32px) translateY(-2px);
+  box-shadow:
+    0 8px 0 0 #4c0519,
+    0 20px 30px rgba(244, 63, 94, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.submit-btn:active {
+  transform: translateZ(32px) translateY(3px);
+  box-shadow:
+    0 2px 0 0 #4c0519,
+    0 6px 12px rgba(244, 63, 94, 0.25);
+}
+
+/* --- Animation Keyframes --- */
+@keyframes liveEqualizer {
+  0% { transform: scaleY(0.6); opacity: 0.35; }
+  50% { transform: scaleY(1.1); opacity: 0.75; }
+  100% { transform: scaleY(0.8); opacity: 0.45; }
+}
+
+@keyframes strobeMorph {
+  0% { transform: translate(-15%, -15%) scale(0.95); }
+  50% { transform: translate(15%, 20%) scale(1.15); }
+  100% { transform: translate(-10%, 10%) scale(1); }
+}
+
+@keyframes hardwareFloat {
+  0% { transform: rotateX(5deg) rotateY(-4deg) translateZ(8px) translateY(0); }
+  50% { transform: rotateX(-3deg) rotateY(4deg) translateZ(20px) translateY(-10px); }
+  100% { transform: rotateX(5deg) rotateY(-4deg) translateZ(8px) translateY(0); }
+}
+
+@keyframes vinylSpin {
+  from { transform: translateZ(-35px) rotate(0deg); }
+  to { transform: translateZ(-35px) rotate(360deg); }
+}
+
+@keyframes btnLaser {
+  0%, 75% { left: -150%; }
+  100% { left: 200%; }
+}
